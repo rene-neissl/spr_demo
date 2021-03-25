@@ -24,7 +24,7 @@ public class DemoApplication {
   @GetMapping()
   public JSONObject test() throws IOException, ParseException {
       //Create HttpURLConnection
-      URL url = new URL("https://api.github.com/repos/microsoft/Web-Dev-For-Beginners");
+      URL url = new URL("https://api.github.com/repos/rene-neissl/spr_demo");
       HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
       httpcon.addRequestProperty("User-Agent", "Mozilla/5.0");
       httpcon.setRequestMethod("GET");
