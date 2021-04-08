@@ -14,15 +14,26 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+@SpringBootApplication
 @RestController
 public class HomeController {
+
+    public static void main(String[] args) {
+        SpringApplication.run(HomeController.class, args);
+    }
 
     @GetMapping("/hello")
     public String hello() {
@@ -52,10 +63,10 @@ public class HomeController {
       if (responsecode != 200) {
           throw new RuntimeException("HttpResponseCode: " + responsecode);
       } else {
-          String inline = "";
+          StringBuilder inline = new StringBuilder();
           Scanner scanner = new Scanner(url.openStream());
           while (scanner.hasNext()) {
-              inline += scanner.nextLine();
+              inline.append(scanner.nextLine());
           }
 
           //Close scanner
@@ -67,11 +78,9 @@ public class HomeController {
 
           ObjectMapper objectMapper = new ObjectMapper();
           objectMapper.registerModule(module);
-          Reader reader = new StringReader(inline);
+          Reader reader = new StringReader(inline.toString());
 
-          GithubDetails det = objectMapper.readValue(reader, GithubDetails.class);
-
-          return det;
+          return objectMapper.readValue(reader, GithubDetails.class);
       }
   }
 }

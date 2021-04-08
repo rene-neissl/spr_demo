@@ -28,7 +28,7 @@ public class GitHubDeserializer extends StdDeserializer<GithubDetails> {
                 if("followers".equals(fieldName)) {
                     det.setFollowers(parser.getValueAsInt());
                 } else if ("login".equals(fieldName)) {
-                    det.set_login(parser.getValueAsString());
+                    det.setLogin(parser.getValueAsString());
                 }
             }
         }

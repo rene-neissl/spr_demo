@@ -9,19 +9,15 @@ public class GithubDetails {
         _login = "";
     }
 
-    public void setFollowers(Integer srcFollowers) {
-        _followers = srcFollowers;
+    public void setFollowers(Integer _followers) {
+        _followers = _followers;
     }
 
-    public void set_login(String _login) {
-        this._login = _login;
-    }
+    public void setLogin(String _login) { this._login = _login; }
 
     public Integer getFollowers() {
         return _followers;
     }
 
-    public String get_login() {
-        return _login;
-    }
+    public String getLogin() { return _login; }
 }
