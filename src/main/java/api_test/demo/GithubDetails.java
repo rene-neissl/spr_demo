@@ -10,7 +10,7 @@ public class GithubDetails {
     }
 
     public void setFollowers(Integer _followers) {
-        _followers = _followers;
+        this._followers = _followers;
     }
 
     public void setLogin(String _login) { this._login = _login; }
@@ -20,4 +20,12 @@ public class GithubDetails {
     }
 
     public String getLogin() { return _login; }
+
+    @Override
+    public String toString() {
+        return "GithubDetails{" +
+                "_login='" + _login + '\'' +
+                ", _followers=" + _followers +
+                '}';
+    }
 }
