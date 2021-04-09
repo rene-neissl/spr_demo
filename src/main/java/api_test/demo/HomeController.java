@@ -55,24 +55,10 @@ public class HomeController {
       if (responsecode != 200) {
           throw new RuntimeException("HttpResponseCode: " + responsecode);
       } else {
-          StringBuilder inline = new StringBuilder();
-          Scanner scanner = new Scanner(url.openStream());
-          while (scanner.hasNext()) {
-              inline.append(scanner.nextLine());
-          }
-
-          //Close scanner
-          scanner.close();
-
-          SimpleModule module =
-                  new SimpleModule("GitHubDeserializer", new Version(3,1,8,null,null,null));
-          module.addDeserializer(GithubDetails.class, new GitHubDeserializer(GithubDetails.class));
-
           ObjectMapper objectMapper = new ObjectMapper();
-          objectMapper.registerModule(module);
-          Reader reader = new StringReader(inline.toString());
+          objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-          return objectMapper.readValue(reader, GithubDetails.class);
+          return objectMapper.readValue(url, GithubDetails.class);
       }
   }
 }
