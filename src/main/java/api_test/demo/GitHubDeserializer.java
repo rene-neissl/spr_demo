@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 
+//This File is no longer needed, but kept for testing purpose
 public class GitHubDeserializer extends StdDeserializer<GithubDetails> {
     public GitHubDeserializer(Class<?> vc) {
         super(vc);
